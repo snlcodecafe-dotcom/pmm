@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
+  <url><loc>https://promotemymemes.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://promotemymemes.com/launch-token</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://promotemymemes.com/audit-token</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://promotemymemes.com/memecoin-promotion</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://promotemymemes.com/crypto-marketing-tool</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://promotemymemes.com/promote-pumpfun-token</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://promotemymemes.com/telegram-crypto-promotion</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+
+  <!-- Token Tools -->
+  <url><loc>https://promotemymemes.com/token-tools/metadata</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://promotemymemes.com/token-tools/liquidity</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://promotemymemes.com/token-tools/indexers</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
+  <!-- Partner / Earn -->
+  <url><loc>https://promotemymemes.com/partner/apply</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+  <!-- Discovery Hubs -->
+  <url><loc>https://promotemymemes.com/top-promoted-tokens</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://promotemymemes.com/recently-added-tokens</loc><changefreq>hourly</changefreq><priority>0.9</priority></url>
+
+  <!-- Category SEO Pages -->
+  <url><loc>https://promotemymemes.com/top-solana-memecoins</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+  <url><loc>https://promotemymemes.com/top-pumpfun-memecoins</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+  <url><loc>https://promotemymemes.com/top-trending-memecoins</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+  <url><loc>https://promotemymemes.com/top-new-memecoins</loc><changefreq>daily</changefreq><priority>0.85</priority></url>
+
+  <!-- Blog Index -->
+  <url><loc>https://promotemymemes.com/blog</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
+  <!-- Blog Posts -->
+  <url><loc>https://promotemymemes.com/blog/how-to-promote-memecoin-2026</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://promotemymemes.com/blog/best-crypto-marketing-strategies</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://promotemymemes.com/blog/how-to-get-buyers-pumpfun-tokens</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://promotemymemes.com/blog/pump-fun-token-launch-strategy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://promotemymemes.com/blog/telegram-memecoin-marketing-guide</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://promotemymemes.com/blog/solana-memecoin-marketing-2026</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- High-traffic programmatic token pages -->
+  <url><loc>https://promotemymemes.com/token/bonk</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/wif</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/pepe</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/popcat</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/dogwifhat</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/fartcoin</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/moodeng</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/pnut</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/ai16z</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/trump</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/melania</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/sigma</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/harambe</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/myro</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+  <url><loc>https://promotemymemes.com/token/goat</loc><changefreq>daily</changefreq><priority>0.75</priority></url>
+
+  <!-- Promote pages -->
+  <url><loc>https://promotemymemes.com/promote-bonk</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/promote-wif</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/promote-pepe</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/promote-fartcoin</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/promote-moodeng</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/promote-ai16z</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <!-- Buy pages -->
+  <url><loc>https://promotemymemes.com/buy-bonk</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-wif</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-pepe</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-fartcoin</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-moodeng</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-popcat</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-trump</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://promotemymemes.com/buy-ai16z</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>
