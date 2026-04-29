@@ -256,25 +256,31 @@ export type Database = {
         Row: {
           channel_name: string | null
           created_at: string
-          enabled: boolean
           id: string
+          is_active: boolean
+          last_post_at: string | null
           server_name: string
+          total_posts: number
           webhook_url: string
         }
         Insert: {
           channel_name?: string | null
           created_at?: string
-          enabled?: boolean
           id?: string
+          is_active?: boolean
+          last_post_at?: string | null
           server_name: string
+          total_posts?: number
           webhook_url: string
         }
         Update: {
           channel_name?: string | null
           created_at?: string
-          enabled?: boolean
           id?: string
+          is_active?: boolean
+          last_post_at?: string | null
           server_name?: string
+          total_posts?: number
           webhook_url?: string
         }
         Relationships: []
@@ -639,6 +645,7 @@ export type Database = {
           code: string
           created_at: string
           id: string
+          total_points_earned: number
           user_id: string
           uses_count: number
         }
@@ -646,6 +653,7 @@ export type Database = {
           code: string
           created_at?: string
           id?: string
+          total_points_earned?: number
           user_id: string
           uses_count?: number
         }
@@ -653,6 +661,7 @@ export type Database = {
           code?: string
           created_at?: string
           id?: string
+          total_points_earned?: number
           user_id?: string
           uses_count?: number
         }
@@ -778,100 +787,174 @@ export type Database = {
         Row: {
           category: string
           chat_id: string
+          cooldown_minutes: number
           created_at: string
-          enabled: boolean
+          group_name: string | null
           id: string
+          is_active: boolean
+          last_post_at: string | null
           member_count: number | null
-          name: string | null
+          total_posts: number
         }
         Insert: {
           category?: string
           chat_id: string
+          cooldown_minutes?: number
           created_at?: string
-          enabled?: boolean
+          group_name?: string | null
           id?: string
+          is_active?: boolean
+          last_post_at?: string | null
           member_count?: number | null
-          name?: string | null
+          total_posts?: number
         }
         Update: {
           category?: string
           chat_id?: string
+          cooldown_minutes?: number
           created_at?: string
-          enabled?: boolean
+          group_name?: string | null
           id?: string
+          is_active?: boolean
+          last_post_at?: string | null
           member_count?: number | null
-          name?: string | null
+          total_posts?: number
         }
         Relationships: []
       }
       token_launches: {
         Row: {
+          amm_type: string | null
+          auto_promo_submission_id: string | null
+          base_amount_sol: number | null
           created_at: string
           current_phase: string
           decimals: number | null
+          description: string | null
           details: Json
+          flag_reason: string | null
+          flagged: boolean
           id: string
+          indexed_dexscreener: boolean
+          indexed_jupiter: boolean
+          indexing_alert_contact: string | null
+          indexing_alert_sent: boolean
           initial_supply: number | null
           liquidity_added: boolean
           liquidity_locked: boolean
+          lock_address: string | null
+          lock_unlock_at: string | null
           logo_url: string | null
+          lp_mint: string | null
           metadata_attached: boolean
           metadata_uri: string | null
           mint_address: string | null
           network: string | null
+          pool_address: string | null
           promotion_started: boolean
+          quote_amount_tokens: number | null
+          telegram: string | null
           token_created: boolean
           token_name: string | null
           token_symbol: string | null
+          total_supply: number | null
+          twitter: string | null
           updated_at: string
           user_id: string
           wallet_address: string | null
+          website: string | null
         }
         Insert: {
+          amm_type?: string | null
+          auto_promo_submission_id?: string | null
+          base_amount_sol?: number | null
           created_at?: string
           current_phase?: string
           decimals?: number | null
+          description?: string | null
           details?: Json
+          flag_reason?: string | null
+          flagged?: boolean
           id?: string
+          indexed_dexscreener?: boolean
+          indexed_jupiter?: boolean
+          indexing_alert_contact?: string | null
+          indexing_alert_sent?: boolean
           initial_supply?: number | null
           liquidity_added?: boolean
           liquidity_locked?: boolean
+          lock_address?: string | null
+          lock_unlock_at?: string | null
           logo_url?: string | null
+          lp_mint?: string | null
           metadata_attached?: boolean
           metadata_uri?: string | null
           mint_address?: string | null
           network?: string | null
+          pool_address?: string | null
           promotion_started?: boolean
+          quote_amount_tokens?: number | null
+          telegram?: string | null
           token_created?: boolean
           token_name?: string | null
           token_symbol?: string | null
+          total_supply?: number | null
+          twitter?: string | null
           updated_at?: string
           user_id: string
           wallet_address?: string | null
+          website?: string | null
         }
         Update: {
+          amm_type?: string | null
+          auto_promo_submission_id?: string | null
+          base_amount_sol?: number | null
           created_at?: string
           current_phase?: string
           decimals?: number | null
+          description?: string | null
           details?: Json
+          flag_reason?: string | null
+          flagged?: boolean
           id?: string
+          indexed_dexscreener?: boolean
+          indexed_jupiter?: boolean
+          indexing_alert_contact?: string | null
+          indexing_alert_sent?: boolean
           initial_supply?: number | null
           liquidity_added?: boolean
           liquidity_locked?: boolean
+          lock_address?: string | null
+          lock_unlock_at?: string | null
           logo_url?: string | null
+          lp_mint?: string | null
           metadata_attached?: boolean
           metadata_uri?: string | null
           mint_address?: string | null
           network?: string | null
+          pool_address?: string | null
           promotion_started?: boolean
+          quote_amount_tokens?: number | null
+          telegram?: string | null
           token_created?: boolean
           token_name?: string | null
           token_symbol?: string | null
+          total_supply?: number | null
+          twitter?: string | null
           updated_at?: string
           user_id?: string
           wallet_address?: string | null
+          website?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "token_launches_auto_promo_submission_id_fkey"
+            columns: ["auto_promo_submission_id"]
+            isOneToOne: false
+            referencedRelation: "token_submissions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       token_submissions: {
         Row: {
