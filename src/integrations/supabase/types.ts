@@ -646,24 +646,27 @@ export type Database = {
           created_at: string
           id: string
           total_points_earned: number
-          user_id: string
+          user_id: string | null
           uses_count: number
+          wallet_address: string | null
         }
         Insert: {
           code: string
           created_at?: string
           id?: string
           total_points_earned?: number
-          user_id: string
+          user_id?: string | null
           uses_count?: number
+          wallet_address?: string | null
         }
         Update: {
           code?: string
           created_at?: string
           id?: string
           total_points_earned?: number
-          user_id?: string
+          user_id?: string | null
           uses_count?: number
+          wallet_address?: string | null
         }
         Relationships: []
       }
@@ -827,6 +830,7 @@ export type Database = {
           amm_type: string | null
           auto_promo_submission_id: string | null
           base_amount_sol: number | null
+          create_tx_signature: string | null
           created_at: string
           current_phase: string
           decimals: number | null
@@ -847,6 +851,7 @@ export type Database = {
           logo_url: string | null
           lp_mint: string | null
           metadata_attached: boolean
+          metadata_tx_signature: string | null
           metadata_uri: string | null
           mint_address: string | null
           network: string | null
@@ -868,6 +873,7 @@ export type Database = {
           amm_type?: string | null
           auto_promo_submission_id?: string | null
           base_amount_sol?: number | null
+          create_tx_signature?: string | null
           created_at?: string
           current_phase?: string
           decimals?: number | null
@@ -888,6 +894,7 @@ export type Database = {
           logo_url?: string | null
           lp_mint?: string | null
           metadata_attached?: boolean
+          metadata_tx_signature?: string | null
           metadata_uri?: string | null
           mint_address?: string | null
           network?: string | null
@@ -909,6 +916,7 @@ export type Database = {
           amm_type?: string | null
           auto_promo_submission_id?: string | null
           base_amount_sol?: number | null
+          create_tx_signature?: string | null
           created_at?: string
           current_phase?: string
           decimals?: number | null
@@ -929,6 +937,7 @@ export type Database = {
           logo_url?: string | null
           lp_mint?: string | null
           metadata_attached?: boolean
+          metadata_tx_signature?: string | null
           metadata_uri?: string | null
           mint_address?: string | null
           network?: string | null
