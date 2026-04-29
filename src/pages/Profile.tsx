@@ -48,7 +48,8 @@ export default function Profile() {
     try {
       // Issue a nonce
       const nonce = crypto.randomUUID();
-      const { error: nErr } = await supabase.from("wallet_claim_nonces").insert({ user_id: user.id, wallet_address: publicKey.toBase58(), nonce });
+      const expiresAt = new Date(Date.now() + 10 * 60 * 1000).toISOString();
+      const { error: nErr } = await supabase.from("wallet_claim_nonces").insert({ user_id: user.id, wallet_address: publicKey.toBase58(), nonce, expires_at: expiresAt });
       if (nErr) throw nErr;
 
       const message = new TextEncoder().encode(`PromoteMyMemes wallet link\nUser: ${user.id}\nNonce: ${nonce}`);
