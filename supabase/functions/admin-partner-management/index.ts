@@ -47,18 +47,26 @@ async function tg(method: string, body: unknown) {
   return await r.json();
 }
 
-async function assertPassword(supabase: any, password?: string) {
-  if (!password) throw new Error("Unauthorized");
-
-  const { data: pwRow, error } = await supabase
-    .from("admin_settings")
-    .select("value")
-    .eq("key", "admin_password")
-    .single();
-
-  if (error || !pwRow || (pwRow as any).value !== password) {
-    throw new Error("Unauthorized");
+async function assertAdmin(req: Request, supabase: any, password?: string) {
+  // Prefer JWT + has_role('admin'); fall back to legacy password.
+  const authHeader = req.headers.get("Authorization");
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.replace("Bearer ", "");
+    const { data: u } = await supabase.auth.getUser(token);
+    if (u?.user) {
+      const { data: hasRole } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "admin" });
+      if (hasRole) return;
+    }
   }
+  if (password) {
+    const { data: pwRow } = await supabase
+      .from("admin_settings")
+      .select("value")
+      .eq("key", "admin_password")
+      .single();
+    if (pwRow && (pwRow as any).value === password) return;
+  }
+  throw new Error("Unauthorized");
 }
 
 function normalizeChannelId(rawValue?: string | null, fallbackLink?: string | null) {
@@ -87,7 +95,7 @@ serve(async (req) => {
     const body = await req.json();
     const { action, password, userId, makeAdmin, channelId, status, rejectionReason } = body ?? {};
 
-    await assertPassword(supabase, password);
+    await assertAdmin(req, supabase, password);
 
     if (action === "load") {
       const [profilesRes, rolesRes, partnersRes, earningsRes, launchesRes, submissionsRes, walletsRes] = await Promise.all([

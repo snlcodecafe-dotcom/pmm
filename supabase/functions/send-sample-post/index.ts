@@ -55,9 +55,22 @@ serve(async (req) => {
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, serviceKey);
 
-    // Verify password
-    const { data: pwRow } = await supabase.from("admin_settings").select("value").eq("key", "admin_password").single();
-    if (!pwRow || pwRow.value !== password) {
+    // Verify caller is an admin: prefer JWT + has_role('admin'); fall back to legacy password.
+    let isAdmin = false;
+    const authHeader = req.headers.get("Authorization");
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      const token = authHeader.replace("Bearer ", "");
+      const { data: u } = await supabase.auth.getUser(token);
+      if (u?.user) {
+        const { data: hasRole } = await supabase.rpc("has_role", { _user_id: u.user.id, _role: "admin" });
+        if (hasRole) isAdmin = true;
+      }
+    }
+    if (!isAdmin) {
+      const { data: pwRow } = await supabase.from("admin_settings").select("value").eq("key", "admin_password").single();
+      if (pwRow && pwRow.value === password) isAdmin = true;
+    }
+    if (!isAdmin) {
       return new Response(JSON.stringify({ success: false, error: "Unauthorized" }), {
         status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
