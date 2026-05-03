@@ -15,11 +15,12 @@ import { DEFAULT_PACKAGES, type PackageConfig } from "@/hooks/usePackages";
 import { RpcMultiPresetEditor } from "@/components/RpcMultiPresetEditor";
 import { AdminUsersTab } from "@/components/admin/AdminUsersTab";
 import { AccountsTab } from "@/components/admin/AccountsTab";
+import AutoPromoteEngineTab from "@/components/admin/AutoPromoteEngineTab";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-type AdminTab = "overview" | "settings" | "submissions" | "campaigns" | "analytics" | "distribution" | "plans" | "integrations" | "viral" | "tg-users" | "scheduler" | "engagement" | "users" | "accounts";
+type AdminTab = "overview" | "settings" | "submissions" | "campaigns" | "analytics" | "distribution" | "plans" | "integrations" | "viral" | "tg-users" | "scheduler" | "engagement" | "users" | "accounts" | "auto-promote";
 
 function TabBtn({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
   return (
@@ -806,6 +807,7 @@ export default function Admin() {
     // Growth content
     { key: "viral", label: "Viral Content", icon: <Sparkles className="w-3.5 h-3.5" /> },
     { key: "scheduler", label: "Scheduler", icon: <CalendarClock className="w-3.5 h-3.5" /> },
+    { key: "auto-promote", label: "Auto Promote", icon: <Sparkles className="w-3.5 h-3.5" /> },
     { key: "engagement", label: "Engagement", icon: <Vote className="w-3.5 h-3.5" /> },
     // Audience
     { key: "users", label: "Users", icon: <Users className="w-3.5 h-3.5" /> },
@@ -2224,6 +2226,9 @@ export default function Admin() {
             </SCard>
           </div>
         )}
+
+        {/* ── AUTO PROMOTE ENGINE TAB ── */}
+        {activeTab === "auto-promote" && <AutoPromoteEngineTab />}
 
         {/* ── ENGAGEMENT TAB ── */}
         {activeTab === "engagement" && (
