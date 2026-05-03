@@ -807,6 +807,7 @@ export default function Admin() {
     // Growth content
     { key: "viral", label: "Viral Content", icon: <Sparkles className="w-3.5 h-3.5" /> },
     { key: "scheduler", label: "Scheduler", icon: <CalendarClock className="w-3.5 h-3.5" /> },
+    { key: "auto-promote", label: "Auto Promote", icon: <Sparkles className="w-3.5 h-3.5" /> },
     { key: "engagement", label: "Engagement", icon: <Vote className="w-3.5 h-3.5" /> },
     // Audience
     { key: "users", label: "Users", icon: <Users className="w-3.5 h-3.5" /> },
