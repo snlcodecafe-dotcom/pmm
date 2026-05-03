@@ -62,6 +62,42 @@ export type Database = {
         }
         Relationships: []
       }
+      automation_settings: {
+        Row: {
+          default_image_url: string | null
+          end_time: string
+          id: number
+          is_enabled: boolean
+          last_generated_for: string | null
+          platforms: string[]
+          posts_per_day: number
+          start_time: string
+          updated_at: string
+        }
+        Insert: {
+          default_image_url?: string | null
+          end_time?: string
+          id: number
+          is_enabled?: boolean
+          last_generated_for?: string | null
+          platforms?: string[]
+          posts_per_day?: number
+          start_time?: string
+          updated_at?: string
+        }
+        Update: {
+          default_image_url?: string | null
+          end_time?: string
+          id?: number
+          is_enabled?: boolean
+          last_generated_for?: string | null
+          platforms?: string[]
+          posts_per_day?: number
+          start_time?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bot_activity_log: {
         Row: {
           action_detail: string
@@ -453,6 +489,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      generated_posts: {
+        Row: {
+          content: string
+          content_hash: string
+          created_at: string
+          error_message: string | null
+          external_ref: string | null
+          id: string
+          image_url: string | null
+          platform: string
+          posted_at: string | null
+          scheduled_time: string
+          status: string
+        }
+        Insert: {
+          content: string
+          content_hash: string
+          created_at?: string
+          error_message?: string | null
+          external_ref?: string | null
+          id?: string
+          image_url?: string | null
+          platform: string
+          posted_at?: string | null
+          scheduled_time: string
+          status?: string
+        }
+        Update: {
+          content?: string
+          content_hash?: string
+          created_at?: string
+          error_message?: string | null
+          external_ref?: string | null
+          id?: string
+          image_url?: string | null
+          platform?: string
+          posted_at?: string | null
+          scheduled_time?: string
+          status?: string
+        }
+        Relationships: []
       }
       metadata: {
         Row: {
