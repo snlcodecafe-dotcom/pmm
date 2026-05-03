@@ -2227,6 +2227,9 @@ export default function Admin() {
           </div>
         )}
 
+        {/* ── AUTO PROMOTE ENGINE TAB ── */}
+        {activeTab === "auto-promote" && <AutoPromoteEngineTab />}
+
         {/* ── ENGAGEMENT TAB ── */}
         {activeTab === "engagement" && (
           <div className="space-y-6">
