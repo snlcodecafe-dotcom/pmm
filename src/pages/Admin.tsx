@@ -2231,6 +2231,7 @@ export default function Admin() {
 
         {/* ── AUTO PROMOTE ENGINE TAB ── */}
         {activeTab === "auto-promote" && <AutoPromoteEngineTab />}
+        {activeTab === "platform-creds" && <PlatformCredentialsTab />}
 
         {/* ── ENGAGEMENT TAB ── */}
         {activeTab === "engagement" && (
