@@ -279,6 +279,8 @@ serve(async (req) => {
       });
     }
 
+    const creds = await loadCreds(supabase);
+
     const { data: due } = await supabase
       .from("generated_posts")
       .select("*")
@@ -296,7 +298,7 @@ serve(async (req) => {
       if (post.platform === "instagram" && !imageUrl) imageUrl = settings.default_image_url;
 
       try {
-        const res = await dispatchOne(post.platform as Platform, post.content, imageUrl, supabase);
+        const res = await dispatchOne(post.platform as Platform, post.content, imageUrl, supabase, creds);
         if (res.ok) {
           await supabase.from("generated_posts").update({
             status: "posted", posted_at: new Date().toISOString(), external_ref: res.ref ?? null, error_message: null,
