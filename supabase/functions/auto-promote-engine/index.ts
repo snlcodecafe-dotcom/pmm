@@ -118,10 +118,22 @@ function pickRandomTimes(count: number, startTime: string, endTime: string): Dat
   return times.sort((a, b) => a.getTime() - b.getTime());
 }
 
-async function dispatchTelegram(content: string, _imageUrl: string | null): Promise<{ ok: boolean; ref?: string; err?: string }> {
-  const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
-  const chatId = Deno.env.get("TELEGRAM_CHANNEL_ID");
-  if (!token || !chatId) return { ok: false, err: "missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHANNEL_ID" };
+type Creds = Record<string, Record<string, any>>;
+
+async function loadCreds(supabase: any): Promise<Creds> {
+  const { data } = await supabase.from("platform_credentials").select("platform, credentials, is_enabled");
+  const out: Creds = {};
+  for (const row of data ?? []) {
+    if (row.is_enabled) out[row.platform] = row.credentials ?? {};
+  }
+  return out;
+}
+
+async function dispatchTelegram(content: string, _imageUrl: string | null, creds: Creds): Promise<{ ok: boolean; ref?: string; err?: string }> {
+  const c = creds["telegram"] ?? {};
+  const token = c.bot_token || Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const chatId = c.channel_id || Deno.env.get("TELEGRAM_CHANNEL_ID");
+  if (!token || !chatId) return { ok: false, err: "Telegram credentials not configured in Admin Panel" };
   const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -149,29 +161,26 @@ async function dispatchDiscord(content: string, imageUrl: string | null, supabas
   return { ok: true };
 }
 
-async function dispatchTwitter(_content: string): Promise<{ ok: boolean; ref?: string; err?: string }> {
-  const ck = Deno.env.get("TWITTER_CONSUMER_KEY");
-  const cs = Deno.env.get("TWITTER_CONSUMER_SECRET");
-  const at = Deno.env.get("TWITTER_ACCESS_TOKEN");
-  const ats = Deno.env.get("TWITTER_ACCESS_TOKEN_SECRET");
-  if (!ck || !cs || !at || !ats) return { ok: false, err: "missing Twitter credentials (TWITTER_CONSUMER_KEY/SECRET, TWITTER_ACCESS_TOKEN/SECRET)" };
-  // Stub: real OAuth1 signing required to actually post; mark as failed so admin sees what's missing.
+async function dispatchTwitter(_content: string, creds: Creds): Promise<{ ok: boolean; ref?: string; err?: string }> {
+  const c = creds["twitter"] ?? {};
+  const ck = c.consumer_key, cs = c.consumer_secret, at = c.access_token, ats = c.access_token_secret;
+  if (!ck || !cs || !at || !ats) return { ok: false, err: "Twitter credentials not configured in Admin Panel" };
   return { ok: false, err: "Twitter posting not implemented yet — credentials present, OAuth1 signing TODO" };
 }
 
-async function dispatchInstagram(_content: string, imageUrl: string | null): Promise<{ ok: boolean; ref?: string; err?: string }> {
-  const token = Deno.env.get("INSTAGRAM_ACCESS_TOKEN");
-  const igUserId = Deno.env.get("INSTAGRAM_USER_ID");
-  if (!token || !igUserId) return { ok: false, err: "missing INSTAGRAM_ACCESS_TOKEN or INSTAGRAM_USER_ID" };
+async function dispatchInstagram(_content: string, imageUrl: string | null, creds: Creds): Promise<{ ok: boolean; ref?: string; err?: string }> {
+  const c = creds["instagram"] ?? {};
+  const token = c.access_token, igUserId = c.user_id;
+  if (!token || !igUserId) return { ok: false, err: "Instagram credentials not configured in Admin Panel" };
   if (!imageUrl) return { ok: false, err: "instagram requires image_url" };
   return { ok: false, err: "Instagram posting not implemented yet — credentials present, Graph API integration TODO" };
 }
 
-async function dispatchOne(platform: Platform, content: string, imageUrl: string | null, supabase: any) {
-  if (platform === "telegram") return dispatchTelegram(content, imageUrl);
+async function dispatchOne(platform: Platform, content: string, imageUrl: string | null, supabase: any, creds: Creds) {
+  if (platform === "telegram") return dispatchTelegram(content, imageUrl, creds);
   if (platform === "discord") return dispatchDiscord(content, imageUrl, supabase);
-  if (platform === "twitter") return dispatchTwitter(content);
-  if (platform === "instagram") return dispatchInstagram(content, imageUrl);
+  if (platform === "twitter") return dispatchTwitter(content, creds);
+  if (platform === "instagram") return dispatchInstagram(content, imageUrl, creds);
   return { ok: false, err: `unsupported platform ${platform}` };
 }
 
@@ -270,6 +279,8 @@ serve(async (req) => {
       });
     }
 
+    const creds = await loadCreds(supabase);
+
     const { data: due } = await supabase
       .from("generated_posts")
       .select("*")
@@ -287,7 +298,7 @@ serve(async (req) => {
       if (post.platform === "instagram" && !imageUrl) imageUrl = settings.default_image_url;
 
       try {
-        const res = await dispatchOne(post.platform as Platform, post.content, imageUrl, supabase);
+        const res = await dispatchOne(post.platform as Platform, post.content, imageUrl, supabase, creds);
         if (res.ok) {
           await supabase.from("generated_posts").update({
             status: "posted", posted_at: new Date().toISOString(), external_ref: res.ref ?? null, error_message: null,

@@ -679,6 +679,27 @@ export type Database = {
           },
         ]
       }
+      platform_credentials: {
+        Row: {
+          credentials: Json
+          is_enabled: boolean
+          platform: string
+          updated_at: string
+        }
+        Insert: {
+          credentials?: Json
+          is_enabled?: boolean
+          platform: string
+          updated_at?: string
+        }
+        Update: {
+          credentials?: Json
+          is_enabled?: boolean
+          platform?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
