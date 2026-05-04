@@ -20,7 +20,7 @@ import AutoPromoteEngineTab from "@/components/admin/AutoPromoteEngineTab";
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-type AdminTab = "overview" | "settings" | "submissions" | "campaigns" | "analytics" | "distribution" | "plans" | "integrations" | "viral" | "tg-users" | "scheduler" | "engagement" | "users" | "accounts" | "auto-promote";
+type AdminTab = "overview" | "settings" | "submissions" | "campaigns" | "analytics" | "distribution" | "plans" | "integrations" | "viral" | "tg-users" | "scheduler" | "engagement" | "users" | "accounts" | "auto-promote" | "platform-creds";
 
 function TabBtn({ active, onClick, icon, label }: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
   return (
