@@ -118,10 +118,22 @@ function pickRandomTimes(count: number, startTime: string, endTime: string): Dat
   return times.sort((a, b) => a.getTime() - b.getTime());
 }
 
-async function dispatchTelegram(content: string, _imageUrl: string | null): Promise<{ ok: boolean; ref?: string; err?: string }> {
-  const token = Deno.env.get("TELEGRAM_BOT_TOKEN");
-  const chatId = Deno.env.get("TELEGRAM_CHANNEL_ID");
-  if (!token || !chatId) return { ok: false, err: "missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHANNEL_ID" };
+type Creds = Record<string, Record<string, any>>;
+
+async function loadCreds(supabase: any): Promise<Creds> {
+  const { data } = await supabase.from("platform_credentials").select("platform, credentials, is_enabled");
+  const out: Creds = {};
+  for (const row of data ?? []) {
+    if (row.is_enabled) out[row.platform] = row.credentials ?? {};
+  }
+  return out;
+}
+
+async function dispatchTelegram(content: string, _imageUrl: string | null, creds: Creds): Promise<{ ok: boolean; ref?: string; err?: string }> {
+  const c = creds["telegram"] ?? {};
+  const token = c.bot_token || Deno.env.get("TELEGRAM_BOT_TOKEN");
+  const chatId = c.channel_id || Deno.env.get("TELEGRAM_CHANNEL_ID");
+  if (!token || !chatId) return { ok: false, err: "Telegram credentials not configured in Admin Panel" };
   const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
