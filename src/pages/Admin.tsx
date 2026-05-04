@@ -16,6 +16,7 @@ import { RpcMultiPresetEditor } from "@/components/RpcMultiPresetEditor";
 import { AdminUsersTab } from "@/components/admin/AdminUsersTab";
 import { AccountsTab } from "@/components/admin/AccountsTab";
 import AutoPromoteEngineTab from "@/components/admin/AutoPromoteEngineTab";
+import PlatformCredentialsTab from "@/components/admin/PlatformCredentialsTab";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
